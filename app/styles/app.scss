@@ -1,0 +1,11 @@
+html, body {
+  margin: 20px;
+}
+
+.foo {
+  color: red;
+
+  &.bar {
+    color: blue;
+  }
+}
