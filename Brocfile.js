@@ -1,8 +1,18 @@
 /* global require, module */
 
+var mergeTrees = require('broccoli-merge-trees');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+  trees: {
+    styles: mergeTrees([
+      'bower_components/bourbon/dist',
+      'bower_components/neat/app/assets/stylesheets',
+      'app/styles'
+    ],
+    { overwrite: true })
+  },
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

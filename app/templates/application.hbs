@@ -1,5 +1,14 @@
-<h2 id='title' class='foo'>Welcome to Ember.js</h2>
+<div class="outer-container">
+  <h2 id='title' class='foo'>Welcome to Ember.js</h2>
+  <h3 class='foo bar'>with SCSS</h3>
+  <h4 class='foo bar'>and Bourbon + Neat</h4>
+  <div class="span-columns-6">
+    @include span-columns(6)
+  </div>
+  <div class="span-columns-6">
+    @include span-columns(6)
+  </div>
+</div>
 
-<h3 class='foo bar'>with SCSS</h3>
 
 {{outlet}}

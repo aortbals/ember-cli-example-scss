@@ -1,5 +1,22 @@
+@import "bourbon";
+@import "neat";
+
 html, body {
   margin: 20px;
+  text-align: center;
+}
+
+$bg-color: #d5eefb;
+
+.outer-container {
+  @include outer-container;
+  background-color: $bg-color;
+}
+
+.span-columns-6 {
+  @include span-columns(6);
+  background-color: darken($bg-color, 10%);
+  height: 20em;
 }
 
 .foo {

@@ -13,6 +13,8 @@
     "ember-qunit": "0.1.8",
     "ember-qunit-notifications": "0.0.4",
     "qunit": "~1.15.0",
-    "normalize-css": "~3.0.2"
+    "normalize-css": "~3.0.2",
+    "bourbon": "3.2.3",
+    "neat": "1.5.1"
   }
 }
