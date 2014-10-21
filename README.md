@@ -1,51 +1,49 @@
 # Ember-cli-example-scss
 
-This README outlines the details of collaborating on this Ember application.
+An example application managing SCSS and CSS dependencies.
 
-A short introduction of this app could easily go here.
+1. [SCSS Support](https://github.com/aortbals/ember-cli-example-scss/commit/efd51a823dbf774fe812d860b325e7cec439f5ae)
 
-## Prerequisites
+```shell
+npm install --save-dev broccoli-sass
+```
 
-You will need the following things properly installed on your computer.
+2. [Add a traditional CSS dependency](https://github.com/aortbals/ember-cli-example-scss/commit/7ce89521b2c974d442dbd34807c996447511205b)
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM) and [Bower](http://bower.io/)
+```shell
+bower install --save normalize-css
+```
 
-## Installation
+`Brocfile.js`
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+```js
+app.import('bower_components/normalize-css/normalize.css');
+```
 
-## Running / Development
+3. [Add Bourbon & Bourbon Neat](https://github.com/aortbals/ember-cli-example-scss/commit/b059b2c15d3a871da698a1e3c18f3b0bc00f9771)
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+Bourbon and Neat must be [`@import`](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#import)'d in your `app.scss` file so that you can properly use the mixins, etc. In order to do this, they must be merged into the app `styles` broccoli tree. Unlike a traditional CSS dependency, these two dependencies cannot use `app.import` in `Brocfile.js`.
 
-### Code Generators
+```shell
+npm install --save-dev broccoli-merge-trees
+bower install --save bourbon#3.2.3 neat#1.5.1
+```
 
-Make use of the many generators for code, try `ember help generate` for more details
+`Brocfile.js`
 
-### Running Tests
+```js
+...
+var mergeTrees = require('broccoli-merge-trees');
 
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* ember: http://emberjs.com/
-* ember-cli: http://www.ember-cli.com/
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
+var app = new EmberApp({
+  trees: {
+    styles: mergeTrees([
+      'bower_components/bourbon/dist',
+      'bower_components/neat/app/assets/stylesheets',
+      'app/styles'
+    ],
+    { overwrite: true })
+  }
+});
+...
+```
